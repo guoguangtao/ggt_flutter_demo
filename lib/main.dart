@@ -1,7 +1,7 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:ggt_flutter_demo/Provide/provider_use.dart';
 import 'package:ggt_flutter_demo/appbar/appbar_use.dart';
 import 'package:ggt_flutter_demo/common/app_setting_config.dart';
 import 'package:ggt_flutter_demo/generated/l10n.dart';
@@ -58,6 +58,7 @@ class _YXCAppContentState extends State<_YXCAppContent> {
       routes: {
         "Internationalizing": (context) => const YXCInternationalizing(),
         "UseAppBar" : (context) => const YXCAppBarUseWidget(),
+        "DataProvide" : (context) => const YXCProviderWidget(),
       },
       home: const _YXCHome(),
       localizationsDelegates: const [
@@ -87,7 +88,8 @@ class _YXCHome extends StatelessWidget {
   Widget build(BuildContext context) {
     List<_YXCHomeModel> models = const [
       _YXCHomeModel(text: '国际化与多语言', route: "Internationalizing"),
-      _YXCHomeModel(text: 'AppBar 的使用记载', route: "UseAppBar")
+      _YXCHomeModel(text: 'AppBar 的使用记载', route: "UseAppBar"),
+      _YXCHomeModel(text: "状态管理", route: "DataProvide"),
     ];
 
     void didSelected(int index) {
