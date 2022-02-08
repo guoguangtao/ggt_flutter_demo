@@ -6,6 +6,7 @@ import 'package:ggt_flutter_demo/appbar/appbar_use.dart';
 import 'package:ggt_flutter_demo/common/app_setting_config.dart';
 import 'package:ggt_flutter_demo/generated/l10n.dart';
 import 'package:ggt_flutter_demo/internationalizing/internationalizing.dart';
+import 'package:ggt_flutter_demo/timer/timer_use.dart';
 
 void main() => runApp(const _YXCApp());
 
@@ -59,6 +60,7 @@ class _YXCAppContentState extends State<_YXCAppContent> {
         "Internationalizing": (context) => const YXCInternationalizing(),
         "UseAppBar" : (context) => const YXCAppBarUseWidget(),
         "DataProvide" : (context) => const YXCProviderWidget(),
+        "UseTimer" : (context) => const YXCUseTimerView(),
       },
       home: const _YXCHome(),
       localizationsDelegates: const [
@@ -90,6 +92,7 @@ class _YXCHome extends StatelessWidget {
       _YXCHomeModel(text: '国际化与多语言', route: "Internationalizing"),
       _YXCHomeModel(text: 'AppBar 的使用记载', route: "UseAppBar"),
       _YXCHomeModel(text: "状态管理", route: "DataProvide"),
+      _YXCHomeModel(text: "定时器使用", route: "UseTimer"),
     ];
 
     void didSelected(int index) {
