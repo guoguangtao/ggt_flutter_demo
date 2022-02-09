@@ -4,6 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:ggt_flutter_demo/Provide/provider_use.dart';
 import 'package:ggt_flutter_demo/appbar/appbar_use.dart';
 import 'package:ggt_flutter_demo/common/app_setting_config.dart';
+import 'package:ggt_flutter_demo/file/file_use.dart';
 import 'package:ggt_flutter_demo/generated/l10n.dart';
 import 'package:ggt_flutter_demo/internationalizing/internationalizing.dart';
 import 'package:ggt_flutter_demo/timer/timer_use.dart';
@@ -57,10 +58,11 @@ class _YXCAppContentState extends State<_YXCAppContent> {
   Widget build(BuildContext context) {
     return MaterialApp(
       routes: {
-        "Internationalizing": (context) => const YXCInternationalizing(),
-        "UseAppBar" : (context) => const YXCAppBarUseWidget(),
-        "DataProvide" : (context) => const YXCProviderWidget(),
-        "UseTimer" : (context) => const YXCUseTimerView(),
+        "/Internationalizing": (context) => const YXCInternationalizing(),
+        "/UseAppBar" : (context) => const YXCAppBarUseWidget(),
+        "/DataProvide" : (context) => const YXCProviderWidget(),
+        "/UseTimer" : (context) => const YXCUseTimerView(),
+        "/UseFile" : (context) => const YXCFileUseView(),
       },
       home: const _YXCHome(),
       localizationsDelegates: const [
@@ -89,10 +91,11 @@ class _YXCHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<_YXCHomeModel> models = const [
-      _YXCHomeModel(text: '国际化与多语言', route: "Internationalizing"),
-      _YXCHomeModel(text: 'AppBar 的使用记载', route: "UseAppBar"),
-      _YXCHomeModel(text: "状态管理", route: "DataProvide"),
-      _YXCHomeModel(text: "定时器使用", route: "UseTimer"),
+      _YXCHomeModel(text: '国际化与多语言', route: "/Internationalizing"),
+      _YXCHomeModel(text: 'AppBar 的使用记载', route: "/UseAppBar"),
+      _YXCHomeModel(text: "状态管理", route: "/DataProvide"),
+      _YXCHomeModel(text: "定时器使用", route: "/UseTimer"),
+      _YXCHomeModel(text: "文件读写操作", route: "/UseFile"),
     ];
 
     void didSelected(int index) {
@@ -117,7 +120,7 @@ class _YXCHome extends StatelessWidget {
           didSelected(index);
         },);
       }, separatorBuilder: (BuildContext context, int index) {
-        return Container(height: 1, color: Colors.black45);
+        return Container(height: 0.5, color: Colors.black45, margin: const EdgeInsets.only(left: 20),);
       }, itemCount: models.length)
     );
   }
