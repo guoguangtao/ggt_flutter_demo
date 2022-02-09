@@ -29,7 +29,7 @@ class YXCDayLogTools {
     String secondString = sprintf("%02d", [dateTime.second]);
     String dayFolderName = "${yearString}_${monthString}_$dayString";
     String fileName = "${hourString}_${minuteString}_$secondString";
-    String logFileName = "DayLog";
+    String logFileName = "DayLogFile";
     // 判断文件夹是否存在
     final dir = await getApplicationDocumentsDirectory();
     String pathName = dir.path;
