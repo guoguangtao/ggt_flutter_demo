@@ -19,36 +19,52 @@ class YXCDayLogTools {
     return _instance!;
   }
 
+  Future<void> _createDir() async {
+    DateTime dateTime = DateTime.now();
+    String yearString = dateTime.year.toString();
+    String monthString = sprintf("%02d", [dateTime.month]);
+    String dayString = sprintf("%02d", [dateTime.day]);
+    String hourString = sprintf("%02d", [dateTime.hour]);
+    String minuteString = sprintf("%02d", [dateTime.minute]);
+    String secondString = sprintf("%02d", [dateTime.second]);
+    String dayFolderName = "${yearString}_${monthString}_$dayString";
+    String fileName = "${hourString}_${minuteString}_$secondString";
+    String logFileName = "DayLog";
+    // 判断文件夹是否存在
+    final dir = await getApplicationDocumentsDirectory();
+    String pathName = dir.path;
+    pathName += "/$logFileName";
+    var directory = Directory(pathName);
+    try {
+      bool exists = await directory.exists();
+      if (exists == false) {
+        await directory.create();
+        print("创建 $pathName 成功");
+      }
+      print("已经存在 $pathName");
+    } catch (e) {
+      print("创建 $pathName 失败");
+    }
+    pathName += "/$dayFolderName";
+    directory = Directory(pathName);
+    try {
+      bool exists = await directory.exists();
+      if (exists == false) {
+        await directory.create();
+        print("创建 $pathName 成功");
+      }
+      print("已经存在 $pathName");
+    } catch (e) {
+      print("创建 $pathName 失败");
+    }
+    pathName += "/$fileName.txt";
+    _fileName = pathName;
+  }
+
   /// 日志写入
   Future<void> writeLog(String logString) async {
     if (_fileName == null) {
-      DateTime dateTime = DateTime.now();
-      String yearString = dateTime.year.toString();
-      String monthString = sprintf("%02d", [dateTime.month]);
-      String dayString = sprintf("%02d", [dateTime.day]);
-      String hourString = sprintf("%02d", [dateTime.hour]);
-      String minuteString = sprintf("%02d", [dateTime.minute]);
-      String secondString = sprintf("%02d", [dateTime.second]);
-      String dayFolderName = "${yearString}_${monthString}_$dayString";
-      String fileName = "${hourString}_${minuteString}_$secondString";
-      String logFileName = "DayLog";
-      // 判断文件夹是否存在
-      final dir = await getApplicationDocumentsDirectory();
-      String pathName = dir.path;
-      pathName += "/$logFileName/$dayFolderName";
-      var directory = Directory(pathName);
-      try {
-        bool exists = await directory.exists();
-        if (exists == false) {
-          await directory.create();
-          print("创建 $pathName 成功");
-        }
-        print("已经存在 $pathName");
-      } catch (e) {
-        print("创建 $pathName 失败");
-      }
-      pathName += "/$fileName.txt";
-      _fileName = pathName;
+      await _createDir();
     }
     var file = File(_fileName!);
     // 将 Log 写入到文件中
