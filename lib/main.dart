@@ -4,12 +4,18 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:ggt_flutter_demo/Provide/provider_use.dart';
 import 'package:ggt_flutter_demo/appbar/appbar_use.dart';
 import 'package:ggt_flutter_demo/common/app_setting_config.dart';
+import 'package:ggt_flutter_demo/file/day_log_tools.dart';
 import 'package:ggt_flutter_demo/file/file_use.dart';
 import 'package:ggt_flutter_demo/generated/l10n.dart';
 import 'package:ggt_flutter_demo/internationalizing/internationalizing.dart';
 import 'package:ggt_flutter_demo/timer/timer_use.dart';
 
-void main() => runApp(const _YXCApp());
+// void main() => runApp(const _YXCApp());
+
+void main() {
+  YXCDayLogTools.instance;
+  runApp(const _YXCApp());
+}
 
 class _YXCApp extends StatelessWidget {
   const _YXCApp({Key? key}) : super(key: key);

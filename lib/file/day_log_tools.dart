@@ -15,7 +15,10 @@ class YXCDayLogTools {
   factory YXCDayLogTools() => _getInstance();
   static YXCDayLogTools get instance => _getInstance();
   static YXCDayLogTools _getInstance() {
-    _instance ??= YXCDayLogTools._internal();
+    if (_instance == null) {
+      _instance = YXCDayLogTools._internal();
+      _instance?._createDir();
+    }
     return _instance!;
   }
 
