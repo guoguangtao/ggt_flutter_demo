@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class YXCUseCustomScrollView extends StatelessWidget {
@@ -12,8 +11,8 @@ class YXCUseCustomScrollView extends StatelessWidget {
           "CustomScrollView",
           style: TextStyle(color: Colors.black),
         ),
-        elevation: 0,
-        backgroundColor: Colors.transparent,
+        // elevation: 0,
+        // backgroundColor: Colors.transparent,
       ),
       body: const _YXCUserCustomScrollBodyView(),
     );
