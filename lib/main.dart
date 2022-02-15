@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:ggt_flutter_demo/Provide/provider_use.dart';
 import 'package:ggt_flutter_demo/appbar/appbar_use.dart';
+import 'package:ggt_flutter_demo/box_constraints/box_constraints.dart';
 import 'package:ggt_flutter_demo/common/app_setting_config.dart';
 import 'package:ggt_flutter_demo/file/day_log_tools.dart';
 import 'package:ggt_flutter_demo/file/file_use.dart';
@@ -69,6 +70,7 @@ class _YXCAppContentState extends State<_YXCAppContent> {
         "/DataProvide" : (context) => const YXCProviderWidget(),
         "/UseTimer" : (context) => const YXCUseTimerView(),
         "/UseFile" : (context) => const YXCFileUseView(),
+        "/BoxConstraints" : (context) => const YXCBoxConstraints(),
       },
       home: const _YXCHome(),
       localizationsDelegates: const [
@@ -102,6 +104,7 @@ class _YXCHome extends StatelessWidget {
       _YXCHomeModel(text: "状态管理", route: "/DataProvide"),
       _YXCHomeModel(text: "定时器使用", route: "/UseTimer"),
       _YXCHomeModel(text: "文件读写操作", route: "/UseFile"),
+      _YXCHomeModel(text: "盒子协议(BoxConstraints)", route: "/BoxConstraints"),
     ];
 
     void didSelected(int index) {

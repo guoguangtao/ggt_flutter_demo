@@ -27,12 +27,12 @@ class _YXCUseTimerViewState extends State<YXCUseTimerView> {
   }
 }
 
-
 class _YXCUseTimerCustomerView extends StatefulWidget {
   const _YXCUseTimerCustomerView({Key? key}) : super(key: key);
 
   @override
-  State<_YXCUseTimerCustomerView> createState() => _YXCUseTimerCustomerViewState();
+  State<_YXCUseTimerCustomerView> createState() =>
+      _YXCUseTimerCustomerViewState();
 }
 
 class _YXCUseTimerCustomerViewState extends State<_YXCUseTimerCustomerView> {
@@ -79,6 +79,7 @@ class _LeBoUseTimerBodyViewState extends State<_LeBoUseTimerBodyView> {
 
 class YXCCountProvider extends ChangeNotifier {
   int _count = 60;
+  Timer? _timer;
 
   int get count => _count;
 
@@ -91,12 +92,22 @@ class YXCCountProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+    if (_timer != null) {
+      _timer?.cancel();
+      _timer = null;
+    }
+    _count = 60;
+  }
+
   void startTimer() {
-    Timer.periodic(const Duration(seconds: 1), (timer) {
-      _countDown();
-      if (count == 60) {
-        timer.cancel();
-      }
-    });
+    _timer ??= Timer.periodic(const Duration(seconds: 1), (timer) {
+        _countDown();
+        if (count == 60) {
+          _timer?.cancel();
+        }
+      });
   }
 }
