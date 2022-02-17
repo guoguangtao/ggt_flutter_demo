@@ -38,7 +38,7 @@ class YXCUseTableView extends StatelessWidget {
                 _YXCBuildItem(text: "Row22", color: Colors.orangeAccent),
                 _YXCBuildItem(text: "Row23", color: Colors.yellowAccent),
                 _YXCBuildItem(text: "Row24", color: Colors.greenAccent),
-                _YXCBuildItem(text: "Row25", color: Colors.purpleAccent,)
+                _YXCBuildItem(text: "Row25", color: Colors.purpleAccent),
               ],
             ),
           ],

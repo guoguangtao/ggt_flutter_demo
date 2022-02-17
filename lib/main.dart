@@ -9,6 +9,7 @@ import 'package:ggt_flutter_demo/file/day_log_tools.dart';
 import 'package:ggt_flutter_demo/file/file_use.dart';
 import 'package:ggt_flutter_demo/generated/l10n.dart';
 import 'package:ggt_flutter_demo/internationalizing/internationalizing.dart';
+import 'package:ggt_flutter_demo/key_use/key_use.dart';
 import 'package:ggt_flutter_demo/scrollview/scroll_view_use.dart';
 import 'package:ggt_flutter_demo/table/table_use.dart';
 import 'package:ggt_flutter_demo/timer/timer_use.dart';
@@ -75,6 +76,7 @@ class _YXCAppContentState extends State<_YXCAppContent> {
         "/BoxConstraints" : (context) => const YXCBoxConstraints(),
         "/CustomScrollView" : (context) => const YXCUseCustomScrollView(),
         "/Table" : (context) => const YXCUseTableView(),
+        "/UseKey" : (context) => const YXCUseKeyView(),
       },
       home: const _YXCHome(),
       localizationsDelegates: const [
@@ -111,6 +113,7 @@ class _YXCHome extends StatelessWidget {
       _YXCHomeModel(text: "盒子协议(BoxConstraints)", route: "/BoxConstraints"),
       _YXCHomeModel(text: "Use CustomScrollView", route: "/CustomScrollView"),
       _YXCHomeModel(text: "Use Table", route: "/Table"),
+      _YXCHomeModel(text: "Use Key", route: "/UseKey"),
     ];
 
     void didSelected(int index) {
