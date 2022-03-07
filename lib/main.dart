@@ -8,6 +8,7 @@ import 'package:ggt_flutter_demo/common/app_setting_config.dart';
 import 'package:ggt_flutter_demo/file/day_log_tools.dart';
 import 'package:ggt_flutter_demo/file/file_use.dart';
 import 'package:ggt_flutter_demo/generated/l10n.dart';
+import 'package:ggt_flutter_demo/image/image_use.dart';
 import 'package:ggt_flutter_demo/internationalizing/internationalizing.dart';
 import 'package:ggt_flutter_demo/key_use/key_use.dart';
 import 'package:ggt_flutter_demo/scrollview/scroll_view_use.dart';
@@ -79,6 +80,7 @@ class _YXCAppContentState extends State<_YXCAppContent> {
         "/Table" : (context) => const YXCUseTableView(),
         "/UseKey" : (context) => const YXCUseKeyView(),
         "/UpdateView" : (context) => const YXCUpdateWidgetView(),
+        "/LoadImage" : (context) => const YXCUseImageView(),
       },
       home: const _YXCHome(),
       localizationsDelegates: const [
@@ -117,6 +119,7 @@ class _YXCHome extends StatelessWidget {
       _YXCHomeModel(text: "Use Table", route: "/Table"),
       _YXCHomeModel(text: "Use Key", route: "/UseKey"),
       _YXCHomeModel(text: "刷新View的几种方式", route: "/UpdateView"),
+      _YXCHomeModel(text: "加载图片", route: "/LoadImage"),
     ];
 
     void didSelected(int index) {

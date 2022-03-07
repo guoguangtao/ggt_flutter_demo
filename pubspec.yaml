@@ -39,7 +39,7 @@ dependencies:
   provider: ^6.0.2
   path_provider: ^2.0.8
   sprintf: ^6.0.0
-
+  crypto: ^3.0.1
 
 
 dev_dependencies:
@@ -63,6 +63,10 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  assets:
+    - assets/images/
+    - assets/images/2.0x/
+    - assets/images/3.0x/
 
 flutter_intl:
   enabled: true

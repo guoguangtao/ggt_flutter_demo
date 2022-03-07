@@ -45,10 +45,6 @@ class YXCUseGlobalKeyView extends StatefulWidget {
 }
 
 class _YXCUseGlobalKeyViewState extends State<YXCUseGlobalKeyView> {
-
-  int _count = 0;
-  GlobalKey<_>
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
