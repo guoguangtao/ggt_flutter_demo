@@ -19,3 +19,11 @@ class AppSetting {
     return _instance!;
   }
 }
+
+/// 收起键盘
+void closeKeyboard(BuildContext context) {
+  FocusScopeNode currentFocus = FocusScope.of(context);
+  if (!currentFocus.hasPrimaryFocus && currentFocus.focusedChild != null) {
+    FocusManager.instance.primaryFocus?.unfocus();
+  }
+}

@@ -11,6 +11,7 @@ import 'package:ggt_flutter_demo/generated/l10n.dart';
 import 'package:ggt_flutter_demo/image/image_use.dart';
 import 'package:ggt_flutter_demo/internationalizing/internationalizing.dart';
 import 'package:ggt_flutter_demo/key_use/key_use.dart';
+import 'package:ggt_flutter_demo/keyboard/keyboard_use.dart';
 import 'package:ggt_flutter_demo/scrollview/scroll_view_use.dart';
 import 'package:ggt_flutter_demo/table/table_use.dart';
 import 'package:ggt_flutter_demo/timer/timer_use.dart';
@@ -81,6 +82,7 @@ class _YXCAppContentState extends State<_YXCAppContent> {
         "/UseKey" : (context) => const YXCUseKeyView(),
         "/UpdateView" : (context) => const YXCUpdateWidgetView(),
         "/LoadImage" : (context) => const YXCUseImageView(),
+        "/UseKeyBoard" : (context) => const YXCKeyBoardUseView(),
       },
       home: const _YXCHome(),
       localizationsDelegates: const [
@@ -120,6 +122,7 @@ class _YXCHome extends StatelessWidget {
       _YXCHomeModel(text: "Use Key", route: "/UseKey"),
       _YXCHomeModel(text: "刷新View的几种方式", route: "/UpdateView"),
       _YXCHomeModel(text: "加载图片", route: "/LoadImage"),
+      _YXCHomeModel(text: "键盘的使用", route: "/UseKeyBoard"),
     ];
 
     void didSelected(int index) {
