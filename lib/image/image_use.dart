@@ -26,9 +26,6 @@ class _YXCUserImageBodyView extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Image.asset("home_leBo_icon".localImageName()),
-          // const SizedBox(height: 20),
-          // Image.network(
-          //     "https://t7.baidu.com/it/u=887525017,4144689287&fm=193&f=GIF"),
           const SizedBox(height: 20),
           FadeInImage(
             placeholder: AssetImage("home_leBo_icon".localImageName()),
@@ -36,15 +33,10 @@ class _YXCUserImageBodyView extends StatelessWidget {
                 "https://t7.baidu.com/it/u=615298619,3403416058&fm=193&f=GIF"),
           ),
           const SizedBox(height: 20),
-          // yxcNetWorkImage(
-          //     url:
-          //         "https://t7.baidu.com/it/u=3276746738,705029168&fm=193&f=GIF",
-          //     placeholder: "home_leBo_icon".localImageName()),
-
           yxcNetWorkImage(
               url:
-              "",
-              placeholder: "".localImageName()),
+                  "https://t7.baidu.com/it/u=3276746738,705029168&fm=193&f=GIF",
+              placeholder: "home_leBo_icon".localImageName()),
         ],
       ),
     );

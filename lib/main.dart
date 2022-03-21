@@ -13,6 +13,7 @@ import 'package:ggt_flutter_demo/internationalizing/internationalizing.dart';
 import 'package:ggt_flutter_demo/key_use/key_use.dart';
 import 'package:ggt_flutter_demo/keyboard/keyboard_use.dart';
 import 'package:ggt_flutter_demo/loading/use_loading.dart';
+import 'package:ggt_flutter_demo/portrait_landscape/portrait_landscape.dart';
 import 'package:ggt_flutter_demo/scrollview/scroll_view_use.dart';
 import 'package:ggt_flutter_demo/table/table_use.dart';
 import 'package:ggt_flutter_demo/timer/timer_use.dart';
@@ -85,6 +86,7 @@ class _YXCAppContentState extends State<_YXCAppContent> {
         "/LoadImage" : (context) => const YXCUseImageView(),
         "/UseKeyBoard" : (context) => const YXCKeyBoardUseView(),
         "/NetLoading" : (context) => const YXCUseLoadingView(),
+        "/PortraitLandscape" : (context) => const YXCPortraitLandscapeView(),
       },
       home: const _YXCHome(),
       localizationsDelegates: const [
@@ -126,6 +128,7 @@ class _YXCHome extends StatelessWidget {
       _YXCHomeModel(text: "加载图片", route: "/LoadImage"),
       _YXCHomeModel(text: "键盘的使用", route: "/UseKeyBoard"),
       _YXCHomeModel(text: "网络加载动画", route: "/NetLoading"),
+      _YXCHomeModel(text: "横竖屏适配", route: "/PortraitLandscape"),
     ];
 
     void didSelected(int index) {
