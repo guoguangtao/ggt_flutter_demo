@@ -1,5 +1,6 @@
-
 import 'package:flutter/material.dart';
+import 'package:ggt_flutter_demo/tools/extension/string_extension.dart';
+import 'package:ggt_flutter_demo/tools/widgets/yxc_widgets.dart';
 
 class YXCPortraitLandscapeView extends StatelessWidget {
   const YXCPortraitLandscapeView({Key? key}) : super(key: key);
@@ -33,25 +34,21 @@ class _YXCPortraitLandscapeBodyView extends StatelessWidget {
   Widget _bodyWidget(BuildContext context, bool isLandscape) {
     return Column(
       children: [
-        const Text(
-          "横竖屏适配**顶部",
-          style: TextStyle(fontSize: 20),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset("home_leBo_icon".localImageName()),
+            FadeInImage(
+              placeholder: AssetImage("home_leBo_icon".localImageName()),
+              image: const NetworkImage(
+                  "https://t7.baidu.com/it/u=615298619,3403416058&fm=193&f=GIF"),
+            ),
+            yxcNetWorkImage(
+                url:
+                    "https://t7.baidu.com/it/u=3276746738,705029168&fm=193&f=GIF",
+                placeholder: "home_leBo_icon".localImageName()),
+          ],
         ),
-        const SizedBox(height: 20),
-        Container(height: 200, color: Colors.red),
-        isLandscape
-            ? Container(height: 100, color: Colors.orange,)
-            : Expanded(
-                child: Container(
-                  color: Colors.orange,
-                ),
-              ),
-        const SizedBox(height: 20),
-        const Text(
-          "横竖屏适配**底部",
-          style: TextStyle(fontSize: 20),
-        ),
-        SizedBox(height: MediaQuery.of(context).padding.bottom),
       ],
     );
   }
