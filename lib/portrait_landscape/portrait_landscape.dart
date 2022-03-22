@@ -11,7 +11,7 @@ class YXCPortraitLandscapeView extends StatelessWidget {
       appBar: AppBar(
         title: const Text("横竖屏适配"),
       ),
-      body: const _YXCPortraitLandscapeBodyView(),
+      body: const SafeArea(child: _YXCPortraitLandscapeBodyView()),
     );
   }
 }

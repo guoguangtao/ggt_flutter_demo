@@ -148,13 +148,15 @@ class _YXCHome extends StatelessWidget {
           ),
         ),
       ),
-      body: ListView.separated(itemBuilder: (BuildContext context, int index) {
-        return _YXCHomeListCell(model: models[index], onTap: (){
-          didSelected(index);
-        },);
-      }, separatorBuilder: (BuildContext context, int index) {
-        return Container(height: 0.5, color: Colors.black45, margin: const EdgeInsets.only(left: 20),);
-      }, itemCount: models.length)
+      body: SafeArea(
+        child: ListView.separated(itemBuilder: (BuildContext context, int index) {
+          return _YXCHomeListCell(model: models[index], onTap: (){
+            didSelected(index);
+          },);
+        }, separatorBuilder: (BuildContext context, int index) {
+          return Container(height: 0.5, color: Colors.black45, margin: const EdgeInsets.only(left: 20),);
+        }, itemCount: models.length),
+      )
     );
   }
 }
