@@ -62,9 +62,14 @@ class _YXCUseKeyBoardBodyView extends StatelessWidget {
   }
 }
 
-class _YXCTextFieldDialogView extends StatelessWidget {
+class _YXCTextFieldDialogView extends StatefulWidget {
   const _YXCTextFieldDialogView({Key? key}) : super(key: key);
 
+  @override
+  State<_YXCTextFieldDialogView> createState() => _YXCTextFieldDialogViewState();
+}
+
+class _YXCTextFieldDialogViewState extends State<_YXCTextFieldDialogView> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
