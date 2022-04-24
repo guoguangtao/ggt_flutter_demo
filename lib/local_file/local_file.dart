@@ -1,6 +1,8 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:ggt_flutter_demo/local_file/lebo_webview.dart';
 import 'package:path_provider/path_provider.dart';
 
 /// 加载本地文件
@@ -56,12 +58,23 @@ class _YXCLoadLocalFileBodyViewState extends State<_YXCLoadLocalFileBodyView> {
         String fileName = stringList.last;
         _YXCLocalFileType type = isLocalFile(filePath);
         if (type != _YXCLocalFileType.none) {
-          _YXCLocalFileModel fileModel =
-              _YXCLocalFileModel(path: filePath, fileName: fileName, type: type);
+          _YXCLocalFileModel fileModel = _YXCLocalFileModel(
+              path: filePath, fileName: fileName, type: type);
           files.add(fileModel);
-          widgets.add(GestureDetector(child: Text(fileName), onTap: () {
-            print("当前点击了 $fileName 文件，文件类型为 $type");
-          }));
+          widgets.add(GestureDetector(
+              child: Text(fileName),
+              onTap: () {
+                print("当前点击了 $fileName 文件，文件类型为 $type");
+                Uri uri = Uri.dataFromString(filePath,
+                    mimeType: 'text/html',
+                    encoding: Encoding.getByName('utf-8'));
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return LeBoWebView(
+                    url: uri.toString(),
+                    title: fileName,
+                  );
+                }));
+              }));
           widgets.add(const SizedBox(height: 20));
         }
       }
@@ -78,21 +91,35 @@ class _YXCLoadLocalFileBodyViewState extends State<_YXCLoadLocalFileBodyView> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: widgets,
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: widgets,
+        ),
       ),
     );
   }
 }
 
 enum _YXCLocalFileType {
-  none, /// 未知类型
-  txt, /// txt 文件
-  pdf, /// pdf 文件
-  word, /// word 文件
-  excel, /// excel 文件
-  ppt, /// ppt 文件
+  none,
+
+  /// 未知类型
+  txt,
+
+  /// txt 文件
+  pdf,
+
+  /// pdf 文件
+  word,
+
+  /// word 文件
+  excel,
+
+  /// excel 文件
+  ppt,
+
+  /// ppt 文件
 }
 
 class _YXCLocalFileModel {

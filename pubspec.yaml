@@ -41,6 +41,7 @@ dependencies:
   sprintf: ^6.0.0
   crypto: ^3.0.1
   photo_manager: ^2.0.6
+  webview_flutter: ^3.0.2
 
 
 dev_dependencies:

@@ -15,10 +15,12 @@ import 'package:ggt_flutter_demo/key_use/key_use.dart';
 import 'package:ggt_flutter_demo/keyboard/keyboard_use.dart';
 import 'package:ggt_flutter_demo/loading/use_loading.dart';
 import 'package:ggt_flutter_demo/local_file/local_file.dart';
+import 'package:ggt_flutter_demo/local_file/local_file_list.dart';
 import 'package:ggt_flutter_demo/portrait_landscape/portrait_landscape.dart';
 import 'package:ggt_flutter_demo/scrollview/scroll_view_use.dart';
 import 'package:ggt_flutter_demo/table/table_use.dart';
 import 'package:ggt_flutter_demo/timer/timer_use.dart';
+import 'package:ggt_flutter_demo/tools/global_tools.dart';
 import 'package:ggt_flutter_demo/update_widget/update_widget.dart';
 
 // void main() => runApp(const _YXCApp());
@@ -91,6 +93,7 @@ class _YXCAppContentState extends State<_YXCAppContent> {
         "/PortraitLandscape" : (context) => const YXCPortraitLandscapeView(),
         "/ButtonPreventRepeatClick" : (context) => const YXCPreventRepeatClickView(),
         "/LocalFile" : (context) => const YXCLocalFileLoadView(),
+        "/LocalFilesList" : (context) => const YXCLocalFilesListView(),
       },
       home: const _YXCHome(),
       localizationsDelegates: const [
@@ -118,7 +121,9 @@ class _YXCHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AppGlobalConfigure.instance.initScreenConfigure(context);
     List<_YXCHomeModel> models = const [
+      _YXCHomeModel(text: "文件列表", route: "/LocalFilesList"),
       _YXCHomeModel(text: '国际化与多语言', route: "/Internationalizing"),
       _YXCHomeModel(text: 'AppBar 的使用记载', route: "/UseAppBar"),
       _YXCHomeModel(text: "状态管理", route: "/DataProvide"),
@@ -134,7 +139,7 @@ class _YXCHome extends StatelessWidget {
       _YXCHomeModel(text: "网络加载动画", route: "/NetLoading"),
       _YXCHomeModel(text: "横竖屏适配", route: "/PortraitLandscape"),
       _YXCHomeModel(text: "按钮防止重复点击", route: "/ButtonPreventRepeatClick"),
-      _YXCHomeModel(text: "加载本地文件", route: "/LocalFile")
+      _YXCHomeModel(text: "加载本地文件", route: "/LocalFile"),
     ];
 
     void didSelected(int index) {
