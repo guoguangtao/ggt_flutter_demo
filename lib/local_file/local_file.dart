@@ -1,8 +1,7 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:ggt_flutter_demo/local_file/lebo_webview.dart';
+import 'package:ggt_flutter_demo/native/native.dart';
 import 'package:path_provider/path_provider.dart';
 
 /// 加载本地文件
@@ -65,15 +64,7 @@ class _YXCLoadLocalFileBodyViewState extends State<_YXCLoadLocalFileBodyView> {
               child: Text(fileName),
               onTap: () {
                 print("当前点击了 $fileName 文件，文件类型为 $type");
-                Uri uri = Uri.dataFromString(filePath,
-                    mimeType: 'text/html',
-                    encoding: Encoding.getByName('utf-8'));
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return LeBoWebView(
-                    url: uri.toString(),
-                    title: fileName,
-                  );
-                }));
+                NativeMethod.openLocalFile(filePath);
               }));
           widgets.add(const SizedBox(height: 20));
         }
