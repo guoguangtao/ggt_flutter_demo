@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ggt_flutter_demo/button/yxc_prevent_repeat_click.dart';
+import 'package:ggt_flutter_demo/local_file/lebo_file_list.dart';
 import 'package:ggt_flutter_demo/tools/global_tools.dart';
 
 class LeBoChooseFileView extends StatelessWidget {
@@ -63,7 +64,17 @@ class LeBoChooseFileView extends StatelessWidget {
                       fileChooseItem("钉钉文件"),
                       fileChooseItem("QQ文件"),
                       fileChooseItem("手机文档", onTap: () {
-                        Navigator.pushNamed(context, "/LocalFile");
+                        if (Navigator.canPop(context)) {
+                          Navigator.pop(context);
+                        }
+                        showModalBottomSheet(
+                          context: context,
+                          backgroundColor: Colors.transparent,
+                          builder: (context) {
+                            return const LeBoFileListView(
+                                chooseType: LeBoChooseType.mobileDocument);
+                          },
+                        );
                       }),
                       fileChooseItem("手机相册"),
                     ],
@@ -110,4 +121,12 @@ class LeBoChooseFileView extends StatelessWidget {
       ),
     );
   }
+}
+
+enum LeBoChooseType {
+  weChat,
+  dingTalk,
+  qq,
+  mobileDocument,
+  mobilePicture,
 }

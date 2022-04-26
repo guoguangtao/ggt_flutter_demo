@@ -9,7 +9,7 @@ class NativeMethod {
       print("调用原生 openLocalFile 方法:$path");
       _channel.invokeMethod("openLocalFile", {"path" : path});
     } on PlatformException catch (_) {
-      print("Flutter 调用 test 方法失败");
+      print("Flutter 调用 openLocalFile 方法失败");
     }
   }
 }
