@@ -115,6 +115,9 @@ class LeBoFileListTopMenuView extends StatefulWidget {
   /// menu 选中颜色
   final Color? selectedLineColor;
 
+  /// 底部分割线颜色
+  final Color? bottomDividerColor;
+
   const LeBoFileListTopMenuView({
     Key? key,
     this.titles,
@@ -124,6 +127,7 @@ class LeBoFileListTopMenuView extends StatefulWidget {
     this.selectedTextStyle,
     this.indexCallback,
     this.selectedLineColor,
+    this.bottomDividerColor,
   }) : super(key: key);
 
   @override
@@ -182,14 +186,22 @@ class _LeBoFileListTopMenuViewState extends State<LeBoFileListTopMenuView> {
       ));
     });
 
-    return Container(
-      height: widget.height ?? 43,
-      color: widget.backgroundColor ?? Colors.white,
-      alignment: Alignment.centerLeft,
-      child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: Row(mainAxisSize: MainAxisSize.max, children: titleWidgets),
-      ),
+    return Column(
+      children: [
+        Container(
+          height: widget.height ?? 43,
+          color: widget.backgroundColor ?? Colors.white,
+          alignment: Alignment.centerLeft,
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(mainAxisSize: MainAxisSize.max, children: titleWidgets),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left: 15),
+          child: Container(color: widget.bottomDividerColor ?? Color(0xFFE6E8EB), height: 0.5),
+        ),
+      ],
     );
   }
 }
@@ -233,6 +245,7 @@ class _LeBoFileListMenuItem extends StatelessWidget {
     textStyle = model!.isSelected == true ? selectedStyle : textStyle;
 
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
         Row(
           children: [
@@ -245,6 +258,8 @@ class _LeBoFileListMenuItem extends StatelessWidget {
               child: Container(
                 padding: EdgeInsets.only(left: 15, right: 15),
                 color: Colors.transparent,
+                alignment: Alignment.centerLeft,
+                height: 41,
                 child: Text(model!.text, style: textStyle),
               ),
             ),
