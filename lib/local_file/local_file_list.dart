@@ -26,20 +26,24 @@ class _YXCLocalFilesListBodyView extends StatelessWidget {
     return Center(
       child: YXCPreventRepeatClickButton(
         onTap: () {
+          // Navigator.push(context, MaterialPageRoute(builder: (context) {
+          //   return LeBoFileListView(chooseType: LeBoChooseType.mobileDocument);
+          // }));
           showModalBottomSheet(
-              context: context,
-              backgroundColor: Colors.transparent,
-              isDismissible: true,
-              isScrollControlled: true,
-              constraints: BoxConstraints(
-                minHeight: 100,
-                maxHeight: AppGlobalConfigure.instance.screenHeight - 88,
-              ),
-              builder: (context) {
-                // return const LeBoChooseFileView();
-                return const LeBoFileListView(
-                    chooseType: LeBoChooseType.mobileDocument);
-              },);
+            context: context,
+            backgroundColor: Colors.transparent,
+            isDismissible: true,
+            isScrollControlled: true,
+            constraints: BoxConstraints(
+              minHeight: 100,
+              maxHeight: AppGlobalConfigure.instance.screenHeight - 88,
+            ),
+            builder: (context) {
+              // return const LeBoChooseFileView();
+              return const LeBoFileListView(
+                  chooseType: LeBoChooseType.mobileDocument);
+            },
+          );
         },
         child: Container(
           color: Colors.orange,
