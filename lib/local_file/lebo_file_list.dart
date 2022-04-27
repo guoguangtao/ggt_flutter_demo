@@ -1,13 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:ggt_flutter_demo/local_file/lebo_choose_file.dart';
 
-class LeBoFileListView extends StatelessWidget {
+class LeBoFileListView extends StatefulWidget {
   final LeBoChooseType? chooseType;
 
   const LeBoFileListView({Key? key, this.chooseType}) : super(key: key);
 
   @override
+  State<LeBoFileListView> createState() => _LeBoFileListViewState();
+}
+
+class _LeBoFileListViewState extends State<LeBoFileListView> {
+  late int selectedIndex;
+
+  @override
+  void initState() {
+    super.initState();
+    selectedIndex = 0;
+  }
+
+  @override
   Widget build(BuildContext context) {
+
+
+    print("LeBoFileListView 当前选中下标为:$selectedIndex");
+
     return Container(
       decoration: const BoxDecoration(
         color: Colors.white,
@@ -80,9 +97,48 @@ class LeBoFileListView extends StatelessWidget {
           SizedBox(height: 20),
           LeBoFileListTopMenuView(
             titles: ["全部", "PPT", "DOC", "XLS", "PDF", "TXT"],
+            selectedIndex: selectedIndex,
             indexCallback: (index, text) {
               print("选中下标回调: $index, $text");
+              setState(() {
+                selectedIndex = index;
+              });
             },
+          ),
+          SizedBox(height: 20),
+          Container(
+            height: 44,
+            margin: EdgeInsets.only(left: 15, right: 15, top: 4, bottom: 4),
+            decoration: BoxDecoration(
+              color: Color(0xFFF2F6F9),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(width: 12),
+                Icon(Icons.search, size: 20, color: Color(0xFF899099)),
+                SizedBox(width: 12),
+                Text(
+                  "搜索",
+                  style: TextStyle(
+                    fontSize: 16.0,
+                    color: Color(0xFF899099),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(height: 12),
+          Expanded(
+            child: _LeBoFileListBodyView(
+              titles: ["全部", "PPT", "DOC", "XLS", "PDF", "TXT"],
+              onPageChanged: (index) {
+                setState(() {
+                  selectedIndex = index;
+                });
+              },
+            ),
           ),
         ],
       ),
@@ -118,6 +174,9 @@ class LeBoFileListTopMenuView extends StatefulWidget {
   /// 底部分割线颜色
   final Color? bottomDividerColor;
 
+  /// 选中的下标
+  final int? selectedIndex;
+
   const LeBoFileListTopMenuView({
     Key? key,
     this.titles,
@@ -128,6 +187,7 @@ class LeBoFileListTopMenuView extends StatefulWidget {
     this.indexCallback,
     this.selectedLineColor,
     this.bottomDividerColor,
+    this.selectedIndex,
   }) : super(key: key);
 
   @override
@@ -145,17 +205,20 @@ class _LeBoFileListTopMenuViewState extends State<LeBoFileListTopMenuView> {
   /// 当前选中的模型
   late _LeBoFileListItemModel selectedModel;
 
+  late int selectedIndex;
+
   @override
   void initState() {
     super.initState();
 
     if (widget.titles != null) {
       models = [];
+      selectedIndex = widget.selectedIndex ?? 0;
       for (int i = 0; i < widget.titles!.length; i++) {
         String element = widget.titles![i];
         _LeBoFileListItemModel model =
             _LeBoFileListItemModel(i, i == 0, element);
-        if (i == 0) {
+        if (i == selectedIndex) {
           selectedModel = model;
         }
         models.add(model);
@@ -167,7 +230,12 @@ class _LeBoFileListTopMenuViewState extends State<LeBoFileListTopMenuView> {
   Widget build(BuildContext context) {
     // 重新布局
     titleWidgets = [];
-    models.forEach((element) {
+    selectedIndex = widget.selectedIndex ?? 0;
+    print("LeBoFileListTopMenuView 当前选中下标为:$selectedIndex");
+
+    for (int i = 0; i < models.length; i++) {
+      _LeBoFileListItemModel element = models[i];
+      element.isSelected = i == selectedIndex;
       titleWidgets.add(_LeBoFileListMenuItem(
         model: element,
         normalTextStyle: widget.normalTextStyle,
@@ -184,7 +252,7 @@ class _LeBoFileListTopMenuViewState extends State<LeBoFileListTopMenuView> {
           }
         },
       ));
-    });
+    }
 
     return Column(
       children: [
@@ -199,7 +267,9 @@ class _LeBoFileListTopMenuViewState extends State<LeBoFileListTopMenuView> {
         ),
         Padding(
           padding: const EdgeInsets.only(left: 15),
-          child: Container(color: widget.bottomDividerColor ?? Color(0xFFE6E8EB), height: 0.5),
+          child: Container(
+              color: widget.bottomDividerColor ?? Color(0xFFE6E8EB),
+              height: 0.5),
         ),
       ],
     );
@@ -283,4 +353,46 @@ class _LeBoFileListItemModel {
   String text;
 
   _LeBoFileListItemModel(this.index, this.isSelected, this.text);
+}
+
+class _LeBoFileListBodyView extends StatelessWidget {
+  final List<String>? titles;
+
+  final ValueChanged<int>? onPageChanged;
+
+  const _LeBoFileListBodyView({
+    Key? key,
+    this.titles,
+    this.onPageChanged,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return PageView.builder(
+        itemCount: 6,
+        onPageChanged: (index) {
+          if (onPageChanged != null) {
+            onPageChanged!(index);
+          }
+        },
+        itemBuilder: (context, index) {
+          return _LeBoFileListBodyPageView(
+            title: titles![index],
+          );
+        });
+  }
+}
+
+class _LeBoFileListBodyPageView extends StatelessWidget {
+  final String? title;
+
+  const _LeBoFileListBodyPageView({Key? key, this.title}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      alignment: Alignment.center,
+      child: Text(title ?? ""),
+    );
+  }
 }
