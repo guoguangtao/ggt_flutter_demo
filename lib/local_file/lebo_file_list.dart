@@ -18,11 +18,62 @@ class _LeBoFileListViewState extends State<LeBoFileListView> {
 
   late PageController _pageController;
 
+  List<List<_LeBoLocalFileModel>>? fileModels;
+
   @override
   void initState() {
     super.initState();
     selectedIndex = 0;
     _pageController = PageController(initialPage: selectedIndex);
+    fileModels = [
+      getLocalData(),
+      getLocalData(),
+      getLocalData(),
+      getLocalData(),
+      getLocalData(),
+      getLocalData(),
+    ];
+  }
+
+  List<_LeBoLocalFileModel> getLocalData() {
+    return [
+      _LeBoLocalFileModel(
+          fileType: YXCLocalFileType.word,
+          fileName: "投屏商业模式-市场格局培训.doc",
+          fileSize: "532.5KB",
+          date: "2022-04-12 16:30",
+          isSelected: false),
+      _LeBoLocalFileModel(
+          fileType: YXCLocalFileType.excel,
+          fileName: "乐播 2022 年投屏商业模式-市场格局培训.excel",
+          fileSize: "532.5KB",
+          date: "2022-04-12 16:30",
+          isSelected: false),
+      _LeBoLocalFileModel(
+          fileType: YXCLocalFileType.pdf,
+          fileName: "投屏商业模式-市场格局培训.pdf",
+          fileSize: "532.5KB",
+          date: "2022-04-12 16:30",
+          isSelected: false),
+      _LeBoLocalFileModel(
+          fileType: YXCLocalFileType.ppt,
+          fileName: "投屏商业模式-市场格局培训.ppt",
+          fileSize: "532.5KB",
+          date: "2022-04-12 16:30",
+          isSelected: false),
+      _LeBoLocalFileModel(
+          fileType: YXCLocalFileType.txt,
+          fileName: "投屏商业模式-市场格局培训.txt",
+          fileSize: "532.5KB",
+          date: "2022-04-12 16:30",
+          isSelected: false),
+      _LeBoLocalFileModel(
+          fileType: YXCLocalFileType.word,
+          fileName: "投屏商业模式-市场格局培训.doc",
+          fileSize: "532.5KB",
+          date: "2022-04-12 16:30",
+          isSelected: false),
+    ];
   }
 
   @override
@@ -134,44 +185,7 @@ class _LeBoFileListViewState extends State<LeBoFileListView> {
           SizedBox(height: 20),
           Expanded(
             child: _LeBoFileListBodyView(
-              localFiles: [
-                _LeBoLocalFileModel(
-                    fileType: YXCLocalFileType.word,
-                    fileName: "投屏商业模式-市场格局培训.doc",
-                    fileSize: "532.5KB",
-                    date: "2022-04-12 16:30",
-                    isSelected: false),
-                _LeBoLocalFileModel(
-                    fileType: YXCLocalFileType.excel,
-                    fileName: "乐播 2022 年投屏商业模式-市场格局培训.excel",
-                    fileSize: "532.5KB",
-                    date: "2022-04-12 16:30",
-                    isSelected: false),
-                _LeBoLocalFileModel(
-                    fileType: YXCLocalFileType.pdf,
-                    fileName: "投屏商业模式-市场格局培训.pdf",
-                    fileSize: "532.5KB",
-                    date: "2022-04-12 16:30",
-                    isSelected: false),
-                _LeBoLocalFileModel(
-                    fileType: YXCLocalFileType.ppt,
-                    fileName: "投屏商业模式-市场格局培训.ppt",
-                    fileSize: "532.5KB",
-                    date: "2022-04-12 16:30",
-                    isSelected: false),
-                _LeBoLocalFileModel(
-                    fileType: YXCLocalFileType.txt,
-                    fileName: "投屏商业模式-市场格局培训.txt",
-                    fileSize: "532.5KB",
-                    date: "2022-04-12 16:30",
-                    isSelected: false),
-                _LeBoLocalFileModel(
-                    fileType: YXCLocalFileType.word,
-                    fileName: "投屏商业模式-市场格局培训.doc",
-                    fileSize: "532.5KB",
-                    date: "2022-04-12 16:30",
-                    isSelected: false),
-              ],
+              localFiles: fileModels?[selectedIndex],
               selectedIndex: selectedIndex,
               pageController: _pageController,
               onPageChanged: (index) {
