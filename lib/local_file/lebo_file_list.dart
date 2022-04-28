@@ -247,7 +247,8 @@ class _LeBoFileListTopMenuViewState extends State<LeBoFileListTopMenuView> {
         normalTextStyle: widget.normalTextStyle,
         selectedTextStyle: widget.selectedTextStyle,
         indexCallback: (model) {
-          if (model == selectedModel) return;
+          int index = models.indexOf(model);
+          if (index == selectedIndex) return;
           setState(() {
             selectedModel.isSelected = false;
             selectedModel = model;
@@ -327,6 +328,7 @@ class _LeBoFileListMenuItem extends StatelessWidget {
           children: [
             GestureDetector(
               onTap: () {
+                print("${model!.text} 被点击");
                 if (indexCallback != null) {
                   indexCallback!(model!);
                 }
