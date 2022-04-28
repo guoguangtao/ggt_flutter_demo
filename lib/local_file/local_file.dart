@@ -31,14 +31,14 @@ class _YXCLoadLocalFileBodyViewState extends State<_YXCLoadLocalFileBodyView> {
   List<_YXCLocalFileModel> files = [];
   List<Widget> widgets = [];
 
-  _YXCLocalFileType isLocalFile(String? fileName) {
-    if (fileName == null || fileName.isEmpty) return _YXCLocalFileType.none;
-    if (fileName.toLowerCase().endsWith("txt")) return _YXCLocalFileType.txt;
-    if (fileName.toLowerCase().endsWith("doc")) return _YXCLocalFileType.word;
-    if (fileName.toLowerCase().endsWith("pdf")) return _YXCLocalFileType.pdf;
-    if (fileName.toLowerCase().endsWith("ppt")) return _YXCLocalFileType.ppt;
-    if (fileName.toLowerCase().endsWith("xls")) return _YXCLocalFileType.excel;
-    return _YXCLocalFileType.none;
+  YXCLocalFileType isLocalFile(String? fileName) {
+    if (fileName == null || fileName.isEmpty) return YXCLocalFileType.none;
+    if (fileName.toLowerCase().endsWith("txt")) return YXCLocalFileType.txt;
+    if (fileName.toLowerCase().endsWith("doc")) return YXCLocalFileType.word;
+    if (fileName.toLowerCase().endsWith("pdf")) return YXCLocalFileType.pdf;
+    if (fileName.toLowerCase().endsWith("ppt")) return YXCLocalFileType.ppt;
+    if (fileName.toLowerCase().endsWith("xls")) return YXCLocalFileType.excel;
+    return YXCLocalFileType.none;
   }
 
   void loadLocalFile() async {
@@ -52,11 +52,11 @@ class _YXCLoadLocalFileBodyViewState extends State<_YXCLoadLocalFileBodyView> {
     Directory dir = await getApplicationDocumentsDirectory();
     await dir.list(recursive: true).forEach((element) {
       String filePath = element.path;
-      if (isLocalFile(filePath) != _YXCLocalFileType.none) {
+      if (isLocalFile(filePath) != YXCLocalFileType.none) {
         List<String> stringList = filePath.split("/");
         String fileName = stringList.last;
-        _YXCLocalFileType type = isLocalFile(filePath);
-        if (type != _YXCLocalFileType.none) {
+        YXCLocalFileType type = isLocalFile(filePath);
+        if (type != YXCLocalFileType.none) {
           _YXCLocalFileModel fileModel = _YXCLocalFileModel(
               path: filePath, fileName: fileName, type: type);
           files.add(fileModel);
@@ -92,7 +92,7 @@ class _YXCLoadLocalFileBodyViewState extends State<_YXCLoadLocalFileBodyView> {
   }
 }
 
-enum _YXCLocalFileType {
+enum YXCLocalFileType {
   none,
 
   /// 未知类型
@@ -116,7 +116,7 @@ enum _YXCLocalFileType {
 class _YXCLocalFileModel {
   final String? path;
   final String? fileName;
-  final _YXCLocalFileType? type;
+  final YXCLocalFileType? type;
 
   const _YXCLocalFileModel({this.path, this.fileName, this.type});
 }

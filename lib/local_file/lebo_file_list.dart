@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ggt_flutter_demo/local_file/lebo_choose_file.dart';
 
+import 'local_file.dart';
+
 class LeBoFileListView extends StatefulWidget {
   final LeBoChooseType? chooseType;
 
@@ -24,8 +26,6 @@ class _LeBoFileListViewState extends State<LeBoFileListView> {
 
   @override
   Widget build(BuildContext context) {
-    print("LeBoFileListView 当前选中下标为:$selectedIndex");
-
     return Container(
       decoration: const BoxDecoration(
         color: Colors.white,
@@ -100,7 +100,6 @@ class _LeBoFileListViewState extends State<LeBoFileListView> {
             titles: ["全部", "PPT", "DOC", "XLS", "PDF", "TXT"],
             selectedIndex: selectedIndex,
             indexCallback: (index, text) {
-              print("选中下标回调: $index, $text");
               setState(() {
                 selectedIndex = index;
                 _pageController.jumpToPage(selectedIndex);
@@ -134,7 +133,44 @@ class _LeBoFileListViewState extends State<LeBoFileListView> {
           SizedBox(height: 20),
           Expanded(
             child: _LeBoFileListBodyView(
-              titles: ["全部", "PPT", "DOC", "XLS", "PDF", "TXT"],
+              localFiles: [
+                _LeBoLocalFileModel(
+                    fileType: YXCLocalFileType.word,
+                    fileName: "投屏商业模式-市场格局培训.doc",
+                    fileSize: "532.5KB",
+                    date: "2022-04-12 16:30",
+                    isSelected: false),
+                _LeBoLocalFileModel(
+                    fileType: YXCLocalFileType.excel,
+                    fileName: "乐播 2022 年投屏商业模式-市场格局培训.excel",
+                    fileSize: "532.5KB",
+                    date: "2022-04-12 16:30",
+                    isSelected: false),
+                _LeBoLocalFileModel(
+                    fileType: YXCLocalFileType.pdf,
+                    fileName: "投屏商业模式-市场格局培训.pdf",
+                    fileSize: "532.5KB",
+                    date: "2022-04-12 16:30",
+                    isSelected: false),
+                _LeBoLocalFileModel(
+                    fileType: YXCLocalFileType.ppt,
+                    fileName: "投屏商业模式-市场格局培训.ppt",
+                    fileSize: "532.5KB",
+                    date: "2022-04-12 16:30",
+                    isSelected: false),
+                _LeBoLocalFileModel(
+                    fileType: YXCLocalFileType.txt,
+                    fileName: "投屏商业模式-市场格局培训.txt",
+                    fileSize: "532.5KB",
+                    date: "2022-04-12 16:30",
+                    isSelected: false),
+                _LeBoLocalFileModel(
+                    fileType: YXCLocalFileType.word,
+                    fileName: "投屏商业模式-市场格局培训.doc",
+                    fileSize: "532.5KB",
+                    date: "2022-04-12 16:30",
+                    isSelected: false),
+              ],
               selectedIndex: selectedIndex,
               pageController: _pageController,
               onPageChanged: (index) {
@@ -237,7 +273,6 @@ class _LeBoFileListTopMenuViewState extends State<LeBoFileListTopMenuView> {
     // 重新布局
     titleWidgets = [];
     selectedIndex = widget.selectedIndex ?? 0;
-    print("LeBoFileListTopMenuView 当前选中下标为:$selectedIndex");
 
     for (int i = 0; i < models.length; i++) {
       _LeBoFileListItemModel element = models[i];
@@ -328,7 +363,6 @@ class _LeBoFileListMenuItem extends StatelessWidget {
           children: [
             GestureDetector(
               onTap: () {
-                print("${model!.text} 被点击");
                 if (indexCallback != null) {
                   indexCallback!(model!);
                 }
@@ -364,14 +398,14 @@ class _LeBoFileListItemModel {
 }
 
 class _LeBoFileListBodyView extends StatelessWidget {
-  final List<String>? titles;
+  final List<_LeBoLocalFileModel>? localFiles;
   final int? selectedIndex;
   final ValueChanged<int>? onPageChanged;
   final PageController? pageController;
 
   const _LeBoFileListBodyView({
     Key? key,
-    this.titles,
+    this.localFiles,
     this.onPageChanged,
     this.selectedIndex,
     this.pageController,
@@ -379,8 +413,6 @@ class _LeBoFileListBodyView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("_LeBoFileListBodyView 当前选中下标为:$selectedIndex");
-
     return PageView.builder(
         itemCount: 6,
         controller: pageController,
@@ -391,22 +423,113 @@ class _LeBoFileListBodyView extends StatelessWidget {
         },
         itemBuilder: (context, index) {
           return _LeBoFileListBodyPageView(
-            title: titles![index],
+            localFiles: localFiles,
           );
         });
   }
 }
 
 class _LeBoFileListBodyPageView extends StatelessWidget {
-  final String? title;
+  final List<_LeBoLocalFileModel>? localFiles;
 
-  const _LeBoFileListBodyPageView({Key? key, this.title}) : super(key: key);
+  const _LeBoFileListBodyPageView({Key? key, this.localFiles})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      child: Text(title ?? ""),
+      child: ListView.builder(
+          itemCount: localFiles?.length,
+          itemBuilder: (context, index) {
+            return _LeBoFileListCell(
+              fileModel: localFiles?[index],
+            );
+          }),
     );
   }
+}
+
+class _LeBoFileListCell extends StatelessWidget {
+  final _LeBoLocalFileModel? fileModel;
+
+  const _LeBoFileListCell({
+    Key? key,
+    this.fileModel,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.only(left: 15.0, right: 15, top: 11, bottom: 11),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            width: 36,
+            height: 36,
+            color: Colors.greenAccent,
+          ),
+          SizedBox(width: 12),
+          Expanded(
+            child: Row(
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        fileModel?.fileName ?? "",
+                        style: TextStyle(fontSize: 16, color: Color(0xFF131415)),
+                      ),
+                      SizedBox(height: 3),
+                      Row(
+                        children: [
+                          Text(
+                            fileModel?.fileSize ?? "",
+                            style:
+                                TextStyle(fontSize: 12.0, color: Color(0xFF959CA6)),
+                          ),
+                          SizedBox(width: 12),
+                          Text(
+                            fileModel?.date ?? "",
+                            style: TextStyle(
+                              fontSize: 12.0,
+                              color: Color(0XFF959CA6),
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+                SizedBox(width: 12.0),
+                Icon(
+                  Icons.radio_button_unchecked,
+                  size: 20,
+                  color: Color(0xFF9A9D9D),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _LeBoLocalFileModel {
+  YXCLocalFileType fileType;
+  String fileName;
+  String fileSize;
+  String date;
+  bool isSelected;
+
+  _LeBoLocalFileModel({
+    required this.fileType,
+    required this.fileName,
+    required this.fileSize,
+    required this.date,
+    required this.isSelected,
+  });
 }
