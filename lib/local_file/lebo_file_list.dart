@@ -103,7 +103,7 @@ class _LeBoFileListViewState extends State<LeBoFileListView> {
               print("选中下标回调: $index, $text");
               setState(() {
                 selectedIndex = index;
-                _pageController.animateToPage(selectedIndex, duration: Duration(milliseconds: 2), curve: Curves.linear);
+                _pageController.jumpToPage(selectedIndex);
               });
             },
           ),
