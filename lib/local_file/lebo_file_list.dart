@@ -13,16 +13,17 @@ class LeBoFileListView extends StatefulWidget {
 class _LeBoFileListViewState extends State<LeBoFileListView> {
   late int selectedIndex;
 
+  late PageController _pageController;
+
   @override
   void initState() {
     super.initState();
     selectedIndex = 0;
+    _pageController = PageController(initialPage: selectedIndex);
   }
 
   @override
   Widget build(BuildContext context) {
-
-
     print("LeBoFileListView 当前选中下标为:$selectedIndex");
 
     return Container(
@@ -102,6 +103,7 @@ class _LeBoFileListViewState extends State<LeBoFileListView> {
               print("选中下标回调: $index, $text");
               setState(() {
                 selectedIndex = index;
+                _pageController.animateToPage(selectedIndex, duration: Duration(milliseconds: 2), curve: Curves.linear);
               });
             },
           ),
@@ -129,14 +131,18 @@ class _LeBoFileListViewState extends State<LeBoFileListView> {
               ],
             ),
           ),
-          SizedBox(height: 12),
+          SizedBox(height: 20),
           Expanded(
             child: _LeBoFileListBodyView(
               titles: ["全部", "PPT", "DOC", "XLS", "PDF", "TXT"],
+              selectedIndex: selectedIndex,
+              pageController: _pageController,
               onPageChanged: (index) {
-                setState(() {
-                  selectedIndex = index;
-                });
+                setState(
+                  () {
+                    selectedIndex = index;
+                  },
+                );
               },
             ),
           ),
@@ -357,19 +363,25 @@ class _LeBoFileListItemModel {
 
 class _LeBoFileListBodyView extends StatelessWidget {
   final List<String>? titles;
-
+  final int? selectedIndex;
   final ValueChanged<int>? onPageChanged;
+  final PageController? pageController;
 
   const _LeBoFileListBodyView({
     Key? key,
     this.titles,
     this.onPageChanged,
+    this.selectedIndex,
+    this.pageController,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    print("_LeBoFileListBodyView 当前选中下标为:$selectedIndex");
+
     return PageView.builder(
         itemCount: 6,
+        controller: pageController,
         onPageChanged: (index) {
           if (onPageChanged != null) {
             onPageChanged!(index);
