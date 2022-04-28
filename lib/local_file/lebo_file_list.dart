@@ -186,28 +186,39 @@ class _LeBoFileListViewState extends State<LeBoFileListView> {
           Container(
             height: AppGlobalConfigure.instance.screenBottomPadding + 49,
             width: double.maxFinite,
-            padding: EdgeInsets.only(top: 6, bottom: AppGlobalConfigure.instance.screenBottomPadding + 6, right: 15),
+            padding: EdgeInsets.only(
+                top: 6,
+                bottom: AppGlobalConfigure.instance.screenBottomPadding + 6,
+                right: 15),
             alignment: Alignment.centerRight,
             decoration: BoxDecoration(
               color: Colors.white,
               boxShadow: [
-                  BoxShadow(
-                    color: Color(0xFFE6E8EB),
-                    offset: Offset(0, -0.5),
-                    blurRadius: 10.0,
-                    spreadRadius: 1.0,
-                  )
+                BoxShadow(
+                  color: Color(0xFFE6E8EB),
+                  offset: Offset(0, -0.5),
+                  blurRadius: 10.0,
+                  spreadRadius: 1.0,
+                )
               ],
             ),
-            child: Container(
-              decoration: BoxDecoration(
-                color: Color(0xFF1979FF),
-                borderRadius: BorderRadius.circular(8),
+            child: GestureDetector(
+              onTap: () {
+                print("确定按钮被点击");
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Color(0xFF1979FF),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                width: 105,
+                height: 36,
+                alignment: Alignment.center,
+                child: Text(
+                  "确定",
+                  style: TextStyle(fontSize: 15.0, color: Colors.white),
+                ),
               ),
-              width: 105,
-              height: 36,
-              alignment: Alignment.center,
-              child: Text("确定", style: TextStyle(fontSize: 15.0, color: Colors.white),),
             ),
           ),
         ],
@@ -457,21 +468,37 @@ class _LeBoFileListBodyView extends StatelessWidget {
   }
 }
 
-class _LeBoFileListBodyPageView extends StatelessWidget {
+class _LeBoFileListBodyPageView extends StatefulWidget {
   final List<_LeBoLocalFileModel>? localFiles;
 
   const _LeBoFileListBodyPageView({Key? key, this.localFiles})
       : super(key: key);
 
   @override
+  State<_LeBoFileListBodyPageView> createState() =>
+      _LeBoFileListBodyPageViewState();
+}
+
+class _LeBoFileListBodyPageViewState extends State<_LeBoFileListBodyPageView> {
+  _LeBoLocalFileModel? selectedModel;
+
+  @override
   Widget build(BuildContext context) {
+    print("_LeBoFileListBodyPageViewState 刷新");
     return Container(
       alignment: Alignment.center,
       child: ListView.builder(
-          itemCount: localFiles?.length,
+          itemCount: widget.localFiles?.length,
           itemBuilder: (context, index) {
             return _LeBoFileListCell(
-              fileModel: localFiles?[index],
+              fileModel: widget.localFiles?[index],
+              selectedCallback: (model) {
+                if (model == selectedModel) return;
+                selectedModel?.isSelected = false;
+                model.isSelected = true;
+                selectedModel = model;
+                setState(() {});
+              },
             );
           }),
     );
@@ -480,68 +507,82 @@ class _LeBoFileListBodyPageView extends StatelessWidget {
 
 class _LeBoFileListCell extends StatelessWidget {
   final _LeBoLocalFileModel? fileModel;
+  final Function(_LeBoLocalFileModel model)? selectedCallback;
 
   const _LeBoFileListCell({
     Key? key,
     this.fileModel,
+    this.selectedCallback,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.only(left: 15.0, right: 15, top: 11, bottom: 11),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            width: 36,
-            height: 36,
-            color: Colors.greenAccent,
-          ),
-          SizedBox(width: 12),
-          Expanded(
-            child: Row(
-              children: [
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        fileModel?.fileName ?? "",
-                        style:
-                            TextStyle(fontSize: 16, color: Color(0xFF131415)),
-                      ),
-                      SizedBox(height: 3),
-                      Row(
-                        children: [
-                          Text(
-                            fileModel?.fileSize ?? "",
-                            style: TextStyle(
-                                fontSize: 12.0, color: Color(0xFF959CA6)),
-                          ),
-                          SizedBox(width: 12),
-                          Text(
-                            fileModel?.date ?? "",
-                            style: TextStyle(
-                              fontSize: 12.0,
-                              color: Color(0XFF959CA6),
-                            ),
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-                SizedBox(width: 12.0),
-                Icon(
-                  Icons.radio_button_unchecked,
-                  size: 20,
-                  color: Color(0xFF9A9D9D),
-                ),
-              ],
+    return GestureDetector(
+      onTap: () {
+        if (selectedCallback != null) {
+          selectedCallback!(fileModel!);
+        }
+      },
+      child: Container(
+        padding: EdgeInsets.only(left: 15.0, right: 15, top: 11, bottom: 11),
+        color: Colors.transparent,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              width: 36,
+              height: 36,
+              color: Colors.greenAccent,
             ),
-          ),
-        ],
+            SizedBox(width: 12),
+            Expanded(
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          fileModel?.fileName ?? "",
+                          style:
+                              TextStyle(fontSize: 16, color: Color(0xFF131415)),
+                        ),
+                        SizedBox(height: 3),
+                        Row(
+                          children: [
+                            Text(
+                              fileModel?.fileSize ?? "",
+                              style: TextStyle(
+                                  fontSize: 12.0, color: Color(0xFF959CA6)),
+                            ),
+                            SizedBox(width: 12),
+                            Text(
+                              fileModel?.date ?? "",
+                              style: TextStyle(
+                                fontSize: 12.0,
+                                color: Color(0XFF959CA6),
+                              ),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                  SizedBox(width: 12.0),
+                  Icon(
+                    fileModel?.isSelected == true
+                        ? Icons.radio_button_checked
+                        : Icons.radio_button_unchecked,
+                    size: 20,
+                    color: fileModel?.isSelected == true
+                        ? Color(0xFF1979FF)
+                        : Color(0xFF9A9D9D),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
