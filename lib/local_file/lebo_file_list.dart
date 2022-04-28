@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ggt_flutter_demo/local_file/lebo_choose_file.dart';
+import 'package:ggt_flutter_demo/tools/global_tools.dart';
 
 import 'local_file.dart';
 
@@ -180,6 +181,33 @@ class _LeBoFileListViewState extends State<LeBoFileListView> {
                   },
                 );
               },
+            ),
+          ),
+          Container(
+            height: AppGlobalConfigure.instance.screenBottomPadding + 49,
+            width: double.maxFinite,
+            padding: EdgeInsets.only(top: 6, bottom: AppGlobalConfigure.instance.screenBottomPadding + 6, right: 15),
+            alignment: Alignment.centerRight,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              boxShadow: [
+                  BoxShadow(
+                    color: Color(0xFFE6E8EB),
+                    offset: Offset(0, -0.5),
+                    blurRadius: 10.0,
+                    spreadRadius: 1.0,
+                  )
+              ],
+            ),
+            child: Container(
+              decoration: BoxDecoration(
+                color: Color(0xFF1979FF),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              width: 105,
+              height: 36,
+              alignment: Alignment.center,
+              child: Text("确定", style: TextStyle(fontSize: 15.0, color: Colors.white),),
             ),
           ),
         ],
@@ -480,15 +508,16 @@ class _LeBoFileListCell extends StatelessWidget {
                     children: [
                       Text(
                         fileModel?.fileName ?? "",
-                        style: TextStyle(fontSize: 16, color: Color(0xFF131415)),
+                        style:
+                            TextStyle(fontSize: 16, color: Color(0xFF131415)),
                       ),
                       SizedBox(height: 3),
                       Row(
                         children: [
                           Text(
                             fileModel?.fileSize ?? "",
-                            style:
-                                TextStyle(fontSize: 12.0, color: Color(0xFF959CA6)),
+                            style: TextStyle(
+                                fontSize: 12.0, color: Color(0xFF959CA6)),
                           ),
                           SizedBox(width: 12),
                           Text(
