@@ -162,24 +162,22 @@ class _LeBoFileListViewState extends State<LeBoFileListView> {
           Container(
             height: 44,
             margin: EdgeInsets.only(left: 15, right: 15, top: 4, bottom: 4),
+            padding: EdgeInsets.only(right: 12),
             decoration: BoxDecoration(
               color: Color(0xFFF2F6F9),
               borderRadius: BorderRadius.circular(8),
             ),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(width: 12),
-                Icon(Icons.search, size: 20, color: Color(0xFF899099)),
-                SizedBox(width: 12),
-                Text(
-                  "搜索",
-                  style: TextStyle(
-                    fontSize: 16.0,
-                    color: Color(0xFF899099),
-                  ),
+            child: TextField(
+              decoration: InputDecoration(
+                hintText: "搜索",
+                hintStyle: TextStyle(fontSize: 16, color: Color(0xFF899099)),
+                border: InputBorder.none,
+                prefixIcon: Icon(
+                  Icons.search_rounded,
+                  size: 20,
+                  color: Color(0xFF899099),
                 ),
-              ],
+              ),
             ),
           ),
           SizedBox(height: 20),
