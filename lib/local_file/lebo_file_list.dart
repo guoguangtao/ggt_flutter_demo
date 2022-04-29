@@ -168,6 +168,9 @@ class _LeBoFileListViewState extends State<LeBoFileListView> {
               borderRadius: BorderRadius.circular(8),
             ),
             child: TextField(
+              onChanged: (text) {
+                print("搜索关键字$text");
+              },
               decoration: InputDecoration(
                 hintText: "搜索",
                 hintStyle: TextStyle(fontSize: 16, color: Color(0xFF899099)),
