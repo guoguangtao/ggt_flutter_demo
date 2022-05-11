@@ -73,6 +73,54 @@ class _LeBoFileListViewState extends State<LeBoFileListView> {
           fileSize: "532.5KB",
           date: "2022-04-12 16:30",
           isSelected: false),
+      _LeBoLocalFileModel(
+          fileType: YXCLocalFileType.word,
+          fileName: "投屏商业模式-市场格局培训.doc",
+          fileSize: "532.5KB",
+          date: "2022-04-12 16:30",
+          isSelected: false),
+      _LeBoLocalFileModel(
+          fileType: YXCLocalFileType.word,
+          fileName: "投屏商业模式-市场格局培训.doc",
+          fileSize: "532.5KB",
+          date: "2022-04-12 16:30",
+          isSelected: false),
+      _LeBoLocalFileModel(
+          fileType: YXCLocalFileType.word,
+          fileName: "投屏商业模式-市场格局培训.doc",
+          fileSize: "532.5KB",
+          date: "2022-04-12 16:30",
+          isSelected: false),
+      _LeBoLocalFileModel(
+          fileType: YXCLocalFileType.word,
+          fileName: "投屏商业模式-市场格局培训.doc",
+          fileSize: "532.5KB",
+          date: "2022-04-12 16:30",
+          isSelected: false),
+      _LeBoLocalFileModel(
+          fileType: YXCLocalFileType.word,
+          fileName: "投屏商业模式-市场格局培训.doc",
+          fileSize: "532.5KB",
+          date: "2022-04-12 16:30",
+          isSelected: false),
+      _LeBoLocalFileModel(
+          fileType: YXCLocalFileType.word,
+          fileName: "投屏商业模式-市场格局培训.doc",
+          fileSize: "532.5KB",
+          date: "2022-04-12 16:30",
+          isSelected: false),
+      _LeBoLocalFileModel(
+          fileType: YXCLocalFileType.word,
+          fileName: "投屏商业模式-市场格局培训.doc",
+          fileSize: "532.5KB",
+          date: "2022-04-12 16:30",
+          isSelected: false),
+      _LeBoLocalFileModel(
+          fileType: YXCLocalFileType.word,
+          fileName: "投屏商业模式-市场格局培训.doc",
+          fileSize: "532.5KB",
+          date: "2022-04-12 16:30",
+          isSelected: false),
     ];
   }
 
@@ -186,7 +234,7 @@ class _LeBoFileListViewState extends State<LeBoFileListView> {
           SizedBox(height: 20),
           Expanded(
             child: _LeBoFileListBodyView(
-              localFiles: fileModels?[selectedIndex],
+              localFiles: fileModels,
               selectedIndex: selectedIndex,
               pageController: _pageController,
               onPageChanged: (index) {
@@ -452,7 +500,7 @@ class _LeBoFileListItemModel {
 }
 
 class _LeBoFileListBodyView extends StatelessWidget {
-  final List<_LeBoLocalFileModel>? localFiles;
+  final List<List<_LeBoLocalFileModel>>? localFiles;
   final int? selectedIndex;
   final ValueChanged<int>? onPageChanged;
   final PageController? pageController;
@@ -477,7 +525,7 @@ class _LeBoFileListBodyView extends StatelessWidget {
         },
         itemBuilder: (context, index) {
           return _LeBoFileListBodyPageView(
-            localFiles: localFiles,
+            localFiles: localFiles?[index],
           );
         });
   }

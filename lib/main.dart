@@ -5,6 +5,7 @@ import 'package:ggt_flutter_demo/Provide/provider_use.dart';
 import 'package:ggt_flutter_demo/appbar/appbar_use.dart';
 import 'package:ggt_flutter_demo/box_constraints/box_constraints.dart';
 import 'package:ggt_flutter_demo/button/yxc_prevent_repeat_click.dart';
+import 'package:ggt_flutter_demo/cast/yxc_cast_view.dart';
 import 'package:ggt_flutter_demo/common/app_setting_config.dart';
 import 'package:ggt_flutter_demo/file/day_log_tools.dart';
 import 'package:ggt_flutter_demo/file/file_use.dart';
@@ -94,6 +95,7 @@ class _YXCAppContentState extends State<_YXCAppContent> {
         "/ButtonPreventRepeatClick" : (context) => const YXCPreventRepeatClickView(),
         "/LocalFile" : (context) => const YXCLocalFileLoadView(),
         "/LocalFilesList" : (context) => const YXCLocalFilesListView(),
+        "/CastTest" : (context) => const YXCCastView(),
       },
       home: const _YXCHome(),
       localizationsDelegates: const [
@@ -140,6 +142,7 @@ class _YXCHome extends StatelessWidget {
       _YXCHomeModel(text: "横竖屏适配", route: "/PortraitLandscape"),
       _YXCHomeModel(text: "按钮防止重复点击", route: "/ButtonPreventRepeatClick"),
       _YXCHomeModel(text: "加载本地文件", route: "/LocalFile"),
+      _YXCHomeModel(text: "投屏测试", route: "/CastTest"),
     ];
 
     void didSelected(int index) {
