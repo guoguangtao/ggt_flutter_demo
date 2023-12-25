@@ -2,3 +2,4 @@
 #import "YXCDayLogHandler.h"
 #import "FlutterMethodHandler.h"
 #import "YXCMainController.h"
+#import "YXCNavigationController.h"

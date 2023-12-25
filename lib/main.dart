@@ -17,6 +17,8 @@ import 'package:ggt_flutter_demo/keyboard/keyboard_use.dart';
 import 'package:ggt_flutter_demo/loading/use_loading.dart';
 import 'package:ggt_flutter_demo/local_file/local_file.dart';
 import 'package:ggt_flutter_demo/local_file/local_file_list.dart';
+import 'package:ggt_flutter_demo/native/native.dart';
+import 'package:ggt_flutter_demo/page_view/page_view.dart';
 import 'package:ggt_flutter_demo/portrait_landscape/portrait_landscape.dart';
 import 'package:ggt_flutter_demo/scrollview/scroll_view_use.dart';
 import 'package:ggt_flutter_demo/table/table_use.dart';
@@ -96,6 +98,7 @@ class _YXCAppContentState extends State<_YXCAppContent> {
         "/LocalFile" : (context) => const YXCLocalFileLoadView(),
         "/LocalFilesList" : (context) => const YXCLocalFilesListView(),
         "/CastTest" : (context) => const YXCCastView(),
+        "/UsePageView" : (context) => const YXCUsePageView(),
       },
       home: const _YXCHome(),
       localizationsDelegates: const [
@@ -125,6 +128,7 @@ class _YXCHome extends StatelessWidget {
   Widget build(BuildContext context) {
     AppGlobalConfigure.instance.initScreenConfigure(context);
     List<_YXCHomeModel> models = const [
+      _YXCHomeModel(text: "跳转原生界面，查看 NativeController"),
       _YXCHomeModel(text: "文件列表", route: "/LocalFilesList"),
       _YXCHomeModel(text: '国际化与多语言', route: "/Internationalizing"),
       _YXCHomeModel(text: 'AppBar 的使用记载', route: "/UseAppBar"),
@@ -143,11 +147,16 @@ class _YXCHome extends StatelessWidget {
       _YXCHomeModel(text: "按钮防止重复点击", route: "/ButtonPreventRepeatClick"),
       _YXCHomeModel(text: "加载本地文件", route: "/LocalFile"),
       _YXCHomeModel(text: "投屏测试", route: "/CastTest"),
+      _YXCHomeModel(text: "PageView 的使用", route: "/UsePageView"),
     ];
 
     void didSelected(int index) {
       final model = models[index];
       print("跳转 ${model.text}");
+      if (model.text == "跳转原生界面，查看 NativeController") {
+        NativeMethod.jumpNativeView();
+        return;
+      }
       if (model.route != null) {
         Navigator.of(context).pushNamed(model.route!);
       }

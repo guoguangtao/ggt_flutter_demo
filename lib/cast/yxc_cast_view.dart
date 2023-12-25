@@ -16,8 +16,19 @@ class YXCCastView extends StatelessWidget {
   }
 }
 
-class _YXCCastBodyView extends StatelessWidget {
+class _YXCCastBodyView extends StatefulWidget {
   const _YXCCastBodyView({Key? key}) : super(key: key);
+
+  @override
+  State<_YXCCastBodyView> createState() => _YXCCastBodyViewState();
+}
+
+class _YXCCastBodyViewState extends State<_YXCCastBodyView> {
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

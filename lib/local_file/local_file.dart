@@ -92,25 +92,20 @@ class _YXCLoadLocalFileBodyViewState extends State<_YXCLoadLocalFileBodyView> {
   }
 }
 
+/// 文件类型
 enum YXCLocalFileType {
-  none,
-
   /// 未知类型
-  txt,
-
+  none,
   /// txt 文件
-  pdf,
-
+  txt,
   /// pdf 文件
-  word,
-
+  pdf,
   /// word 文件
-  excel,
-
+  word,
   /// excel 文件
-  ppt,
-
+  excel,
   /// ppt 文件
+  ppt,
 }
 
 class _YXCLocalFileModel {

@@ -9,6 +9,7 @@
 #import <Flutter/Flutter.h>
 #import "GeneratedPluginRegistrant.h"
 #import "YXCWebController.h"
+#import "YXCNativeController.h"
 
 @interface FlutterMethodHandler ()
 
@@ -75,6 +76,7 @@ static NSString *channelName = @"com.lebo.channel";
         NSLog(@"获取到根控制器为空");
         return;
     }
+    self.mainController = controller;
     _instance.flutterResults = [NSMutableDictionary dictionary];
     _instance.methodChannel = [FlutterMethodChannel methodChannelWithName:channelName binaryMessenger:controller.binaryMessenger];
     [_instance.methodChannel setMethodCallHandler:^(FlutterMethodCall * _Nonnull call, FlutterResult  _Nonnull result) {
@@ -84,6 +86,12 @@ static NSString *channelName = @"com.lebo.channel";
         [_instance.flutterResults setValue:result forKey:methoName];
         if ([methoName isEqualToString:@"openLocalFile"]) {
             [_instance openLocalFile:arguments];
+            result(@0);
+        } else if ([methoName isEqualToString:@"jumpNativeView"]) {
+            [_instance jumpNativeView];
+            result(@0);
+        } else {
+            result(FlutterMethodNotImplemented);
         }
     }];
 }
@@ -94,6 +102,26 @@ static NSString *channelName = @"com.lebo.channel";
     YXCWebController *controller = [[YXCWebController alloc] initWithLocalPath:path];
     [self pushViewController:controller];
     [self.flutterResults removeObjectForKey:@"openLocalFile"];
+}
+
+/// 跳转原生界面
+- (void)jumpNativeView {
+
+    YXCNativeController *controller_01 = [YXCNativeController new];
+    controller_01.view.backgroundColor = UIColor.orangeColor;
+    controller_01.title = @"第一个控制器";
+    [self pushViewController:controller_01];
+
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        YXCNativeController *controller_02 = [YXCNativeController new];
+        controller_02.view.backgroundColor = UIColor.redColor;
+        controller_02.title = @"第二个控制器";
+        [self pushViewController:controller_02];
+    });
+
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.mainController pushRoute:@"/UseTimer"];
+    });
 }
 
 - (void)pushViewController:(UIViewController *)controller {

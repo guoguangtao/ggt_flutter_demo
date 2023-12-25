@@ -12,4 +12,13 @@ class NativeMethod {
       print("Flutter 调用 openLocalFile 方法失败");
     }
   }
+
+  static void jumpNativeView() {
+    try {
+      print("Flutter 跳转原生界面");
+      _channel.invokeMethod("jumpNativeView");
+    } on PlatformException catch (_) {
+      print("Flutter  跳转原生界面异常");
+    }
+  }
 }

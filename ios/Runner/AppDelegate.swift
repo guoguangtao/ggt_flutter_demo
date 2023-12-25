@@ -21,9 +21,9 @@ let LBSECRETKEY = "a20b4b19e6da15f95464af0e4aa59564";
               print("others");
           }
       }
-      YXCDayLogHandler.redirectLEBLogToDocumentFolder()
+//      YXCDayLogHandler.redirectLEBLogToDocumentFolder()
       let mainController = YXCMainController.init()
-      let navigationController = UINavigationController(rootViewController: mainController)
+      let navigationController = YXCNavigationController(rootViewController: mainController)
       self.window.rootViewController = navigationController;
       print("App 已启动")
       return super.application(application, didFinishLaunchingWithOptions: launchOptions)

@@ -1,22 +1,21 @@
 //
-//  YXCMainController.m
+//  YXCNavigationController.m
 //  Runner
 //
-//  Created by guogt on 2022/4/24.
+//  Created by guogt on 2022/6/8.
 //
 
-#import "YXCMainController.h"
-#import "FlutterMethodHandler.h"
+#import "YXCNavigationController.h"
 
-@interface YXCMainController ()
+@interface YXCNavigationController ()
 
 @end
 
-@implementation YXCMainController
+@implementation YXCNavigationController
 
 /// 刷新UI
 - (void)injected {
-    
+
 }
 
 #pragma mark - Lifecycle
@@ -26,17 +25,17 @@
 
     [self setupUI];
     [self setupConstraints];
-    [FlutterMethodHandler registerWithRegistry:self];
+}
+
+- (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated {
+
+    [super pushViewController:viewController
+                     animated:animated];
+    NSLog(@"当前导航控制器所拥有的控制器:%@", self.viewControllers);
 }
 
 - (void)dealloc {
 
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-
-    [self.navigationController setNavigationBarHidden:YES];
 }
 
 
